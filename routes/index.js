@@ -9,9 +9,6 @@ var app = express();
 router.get('/', function(req, res, next) {
     res.render('login', { title: 'Moodsquare' });
 });
-
-router.post('/',function(req, res, next) {
-
     /* GET home page. */
 
 router.get('/', function(req, res, next) {
