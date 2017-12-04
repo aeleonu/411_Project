@@ -1,0 +1,15 @@
+h1{
+  font: 70px "Chalkduster";
+}
+body {
+    border: 20px solid white;
+    color: white;
+    padding: 13.3%;
+    font: 25px "Chalkduster";
+    background: #ccd8ff;
+    text-align: center
+}
+
+a {
+  color: #ffdc64;
+}
