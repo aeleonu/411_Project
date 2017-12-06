@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+    <!-- Latest compiled and minified jQuery -->
+    <script src="https://code.jquery.com/jquery-2.2.3.js"
+            integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
+    <!-- Angular (minified) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-cookies.js"></script>
+
+
+    <!--Controllers for this page/app -->
+    <script src="javascripts/controllers.js"></script>
+
+    <title>Which Restaurant to GO?</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="narrow-jumbotron.css" rel="stylesheet">
+  </head>
+
+  <body ng-app="cs411" background="/images/background1.jpg">
+  <div ng-controller="cs411ctrl" ng-init="initApp()">
+
+    <div class="container">
+      <header class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills float-right">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item">
+               <!--  ng-click="logout()" -->
+              <a class="nav-link" href="https://github.com/aeleonu/411_Project">Project Repo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.zomato.com/boston">Goto Zomato</a>
+            </li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Which Restaurant to Go?</h3>
+      </header>
+
+      <main role="main">
+        <img src="/images/eari.png"><span class="largeText">  How are you feeling today?</span>
+
+        <!-- <div class="jumbotron">
+          <h1 class="display-3">Jumbotron heading</h1>
+          <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
+        </div> -->
+
+        <form class="form-inline" name="inputMood">
+            <div class="form-group">
+                <!--label calss="sr-only" for="formMood">Mood</label-->
+                <input type="text" name="name" placeholder="Mood..." ng-model="mood" required>
+            </div>
+            <button type="submit" class="btn btn-primary" ng-click="returnRest(mood)">
+                {{buttonMessage0}}
+            </button>
+
+            <!-- <p></p><p></p> -->
+
+<!-- 
+            <div class="text" style="text-align:center;"> Your Matched Restaurant!</div> -->
+            <!--input type="text" id="Match"-->
+           
+            <!-- <div ng-show="restresult">
+            <ul>
+                <li ng-show="restresult">{{restresult}}</li>
+            </ul>
+            </div> -->
+
+        </form>
+
+        <h3>
+            <div ng-show="restresult">
+        <div class="text" style="text-align:center;"> Your Matched Restaurant!
+            <!--input type="text" id="Match"-->
+           
+        <!--<div ng-show="restresult">-->
+            <ul>
+                <li ng-show="restresult">{{restresult}}</li>
+            </ul>
+        </div>
+        </div>
+        </h3>
+        <div ng-hide="authorized">
+        <h2>{{h2message}} {{name}}</h2>
+
+        <form class="form-inline" name="inputForm">
+            <div class="form-group">
+                <label class="sr-only" for="formName">Email address</label>
+                <input type="text" class="form-control" id="formName" placeholder="Username" ng-model="name" required>
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="formUID">Email address</label>
+                <input type="text" class="form-control" id="formUID" placeholder="Password" ng-model="UID" required>
+            </div>
+           <!--  <div class="form-group">
+                <label class="sr-only" for="formDepartment">Password</label>
+                <input type="text" class="form-control" id="formDepartment" placeholder="Email"
+                       ng-model="department" required>
+                <input type="hidden" value="{{user._id}}">
+            </div> -->
+            <button type="submit" class="btn btn-primary" ng-disabled="inputForm.$invalid" ng-click="createUser()">
+                {{buttonMessage}}
+            </button>
+        </form>
+        </div>
+
+        <br/>
+        <div align="center" ng-show="authorized">
+            <br/>
+            <button type="submit" class="btn btn-primary" ng-click="doTwitterAuth()">Log in with Twitter</button>
+        </div>
+        <div ng-show="showLogin">
+            Name: <input type="text" ng-model="name">
+            Username: <input type="text" ng-model="username">
+            Password: <input type="password" ng-model="password">
+            <button class="btn btm-sm" ng-click="login()">Log in</button>
+            <button class="btn btm-sm" ng-click="register()">Register</button>
+
+        </div>
+        <br/>
+        <div align="center" ng-hide="authorized">
+            <button class="btn btn-sm" ng-click="logout()">Log out</button>
+        </div>
+        <div align="center" ng-show="authorized">
+            <button class="btn btn-sm" ng-click="returnTweet()">Analyze Tweets!</button>
+        </div>
+        <br>
+        <h5>
+        <div class="text" style="text-align:center;" ng-show="twiresult"> Your Tweets point to:
+        <div ng-show="twiresult">
+            <!-- <p>Your Tweets point to:</p> -->
+            <ul>
+                <li ng-show="twiresult">{{twiresult}}</li>
+            </ul>
+        </div>
+        </h5>
+        </div>
+    </div>
+    <div class="col-xs-12" style="height:30px;"></div>
+<!--     <div class="well col-md-6">
+        <ul class="list-group">
+            <li ng-controller="listController" class="list-group-item largeText" ng-repeat="user in users">{{user.name}}
+                <span ng-show="display"> {{user.UID}} {{user.department}}</span>
+                <button class="btn btn-sm pull-right btn-danger" ng-click="deleteUser(user._id);">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+                <button class="btn btn-sm pull-right btn-info" ng-click="showInfo(user._id);">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+                <button class="btn btn-sm pull-right btn-warning" ng-click="setUserUpdate(user);">
+                    <span class="glyphicon glyphicon-hand-up"></span>
+                </button>
+            </li>
+        </ul>
+    </div> -->
+       <!--  <p> Your Matched Restaurant!</p> -->
+        <!--input type="text" id="Match"-->
+       <!--  <div ng-show="restresult">
+            <ul>
+                <li ng-show="restresult">{{restresult}}</li>
+            </ul>
+        </div> -->
+       <!--  <div ng-show="authorized">
+            <button class="btn btn-sm" ng-click="returnTweet()">Analyze Tweets!</button>
+        </div>
+        <br>
+        <div ng-show="twiresult">
+            <p>Your Tweets point to:</p>
+            <ul>
+                <li ng-show="twiresult">{{twiresult}}</li>
+            </ul>
+        </div> -->
+
+        <!-- <div class="row marketing">
+          <div class="col-lg-6">
+            <h4>Subheading</h4>
+            <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+            <h4>Subheading</h4>
+            <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+            <h4>Subheading</h4>
+            <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+          </div>
+
+          <div class="col-lg-6">
+            <h4>Subheading</h4>
+            <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+            <h4>Subheading</h4>
+            <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+            <h4>Subheading</h4>
+            <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+          </div>
+        </div> -->
+
+      </main>
+
+      <footer class="footer">
+        <p>&copy; CS411 Group3 2017</p>
+      </footer>
+
+    </div> <!-- /container -->
+  </body>
+</html>

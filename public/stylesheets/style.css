@@ -1,8 +1,21 @@
+h1 {
+  font: 70px "Chalkduster";
+}
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  border: 20px solid white;
+  color: purple;
+  padding: 13.3%;
+  font: 25px "Chalkduster";
+  background: #ccd8ff;
+  text-align: center
 }
 
 a {
-  color: #00B7FF;
+  color: black;
+}
+
+.largeText {
+  font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+
 }
